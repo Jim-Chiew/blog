@@ -1,3 +1,33 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+// 1. Target the figure that wraps the code block
+[data-rehype-pretty-code-figure] {
+  position: relative;
+
+  // 2. Create the label using the 'data-language' attribute
+  &::after {
+    content: attr(data-language); // This pulls "java", "cpp", "bash", etc.
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    
+    // Styling the "bubble" look
+    font-family: var(--codeFont);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--secondary);
+    background: var(--lightgray);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    opacity: 0.7;
+    pointer-events: none; // Makes sure you can still click the code under it
+  }
+}
+
+// 3. Optional: Hide the label when hovering to keep it clean
+[data-rehype-pretty-code-figure]:hover::after {
+  opacity: 0.2;
+  transition: opacity 0.2s ease;
+}
